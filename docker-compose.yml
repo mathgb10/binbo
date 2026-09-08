@@ -1,0 +1,7 @@
+services:
+  binbo:
+    build: .
+    container_name: binbo
+    ports:
+      - "8081:3000"
+    restart: unless-stopped
