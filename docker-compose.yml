@@ -2,6 +2,8 @@ services:
   binbo:
     build: .
     container_name: binbo
+    env_file:
+      - .env
     ports:
       - "8081:3000"
     restart: unless-stopped
