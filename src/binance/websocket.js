@@ -29,8 +29,7 @@ function conectar() {
         const trade = JSON.parse(data);
         console.log('Dados:', trade);
         const msg = `
-            Preço: ${trade.p}
-            Quantidade: ${trade.q}
+            Preço: R$${Number(trade.p).toFixed(2)}
             Símbolo: ${trade.s}
             Trade ID: ${trade.t}
         `;
@@ -40,9 +39,9 @@ function conectar() {
         // Coleto o ID e chamo a função que dispara as mensagens
         chats.forEach(async (e) => {
             const chatId = e.message.chat.id;
-            // if (chatId) {
-            //     await enviarMensagem(chatId, msg);
-            // }
+            if (chatId) {
+                await enviarMensagem(chatId, msg);
+            }
         });
     });
 
