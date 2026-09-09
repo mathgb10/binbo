@@ -56,7 +56,7 @@ function conectar() {
 
     socket.on('error', (error) => {
         console.error('Erro no WebSocket:', error);
-    }
+    });
 }
 
 conectar();
