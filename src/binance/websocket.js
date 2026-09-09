@@ -40,9 +40,9 @@ function conectar() {
         // Coleto o ID e chamo a função que dispara as mensagens
         chats.forEach(async (e) => {
             const chatId = e.message.chat.id;
-            if (chatId) {
-                await enviarMensagem(chatId, msg);
-            }
+            // if (chatId) {
+            //     await enviarMensagem(chatId, msg);
+            // }
         });
     });
 
@@ -53,6 +53,10 @@ function conectar() {
             conectar();
         }, 5000);
     });
+
+    socket.on('error', (error) => {
+        console.error('Erro no WebSocket:', error);
+    }
 }
 
 conectar();
