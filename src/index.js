@@ -1,7 +1,8 @@
-// Chamdando minha biblioteca de Env e Express
+// Chamdando minha biblioteca de Env, Express e meu Socket da Binance
 require('dotenv').config();
 const express = require('express');
 const app = express();
+require('./binance/websocket');
 
 // Porta definida no .env se não for definida, vai exibir um erro e encerrar o processo
 const PORT = process.env.PORT;
