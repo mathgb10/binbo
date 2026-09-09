@@ -6,7 +6,7 @@ function conectar() {
 
     // Cria o Socket apontando pra Binance
     const socket = new webSocket(
-        'wss://stream.binance.com:9443/ws/btcbrl@trade'
+        'wss://stream.binance.us:9443/ws/btcusd@trade'
     );
 
     // Incia o Socket
