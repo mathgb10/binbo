@@ -1,8 +1,9 @@
-// Chamdando minha biblioteca de Env, Express e meu Socket da Binance
+// Chamdando minha biblioteca de Env, Express, meu Socket da Binance e meu Bot do Telegram
 require('dotenv').config();
 const express = require('express');
 const app = express();
 require('./binance/websocket');
+require('./telegram/bot');
 
 // Porta definida no .env se não for definida, vai exibir um erro e encerrar o processo
 const PORT = process.env.PORT;
