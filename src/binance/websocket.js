@@ -6,7 +6,7 @@ function conectar() {
 
     // Cria o Socket apontando pra Binance
     const socket = new webSocket(
-        'wss://stream.binance.us:9443/ws/btcusd@trade'
+        'wss://stream.binance.com/ws/btcbrl@trade'
     );
 
     // Incia o Socket
@@ -40,9 +40,9 @@ function conectar() {
         // Coleto o ID e chamo a função que dispara as mensagens
         chats.forEach(async (e) => {
             const chatId = e.message.chat.id;
-            // if (chatId) {
-            //     await enviarMensagem(chatId, msg);
-            // }
+            if (chatId) {
+                await enviarMensagem(chatId, msg);
+            }
         });
     });
 
