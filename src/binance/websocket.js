@@ -18,6 +18,7 @@ function conectar() {
     // Dados
     socket.on('message', async (data) => {
         const trade = JSON.parse(data);
+        console.log(trade);
         processar(trade);
     });
 
