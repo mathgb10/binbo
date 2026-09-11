@@ -34,4 +34,24 @@ async function enviarMensagem(chatId, mensagem) {
     return dados;
 }
 
-module.exports = { enviarMensagem,buscarChat };
+// Função que envia mensagem para todos os chats disponiveis
+async function enviarMsgParaTodos(tipo,porcentagem) {
+    switch (tipo) {
+        case 1:
+            var msg = `🟢 A cripto Aumentou ${porcentagem.toFixed(2)}% em 24h`;
+            break;
+        case 0:
+            var msg = `🔴 A cripto Caiu ${Math.abs(porcentagem).toFixed(2)}% em 24h`;
+            break;
+        default:
+            var msg = `⚪️ A cripto se manteve estável em 24h`;
+            break;
+    }
+    
+    const chats = await buscarChat();
+    chats.forEach(e => {
+        enviarMensagem(e.chat_id, msg);
+    });
+}
+
+module.exports = { enviarMensagem,buscarChat,enviarMsgParaTodos };

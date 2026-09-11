@@ -1,13 +1,14 @@
 // Usando a bibliteca de Websocket e meu Bot do Telegram
 const webSocket = require('ws');
-const { processar } = require('../trade/eventos');
+const { processar } = require('../utils/eventos');
+
+let mortes = 0;
 
 function conectar() {
-
+    
     // Cria o Socket apontando pra Binance
-    const socket = new webSocket(
-        'wss://stream.binance.com/ws/btcbrl@ticker'
-    );
+    // Se a conexão falhar 5 vezes, ele tenta conectar na Binance US
+    let socket = mortes < 5 ? new webSocket('wss://stream.binance.com/ws/btcbrl@ticker') : new webSocket('wss://stream.binance.us/ws/btcbrl@ticker');
 
     // Incia o Socket
     socket.on('open', async () => {
@@ -30,6 +31,7 @@ function conectar() {
 
     socket.on('error', (error) => {
         console.error('Erro no WebSocket:', error);
+        mortes++;
     });
 }
 
