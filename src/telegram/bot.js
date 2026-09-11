@@ -7,23 +7,21 @@ if (!TOKEN) {
     process.exit(1);
 }
 
+const API_URL = `https://api.telegram.org/bot${TOKEN}/`;
+
 // Função que busca as mensagens do chat, e o mais importante ChatID
 async function buscarChat() {
-    const url = `https://api.telegram.org/bot${TOKEN}/getUpdates?timeout=30`;
-    const resp = await fetch(url);
+    const resp = await fetch(API_URL + 'getUpdates');
     const dados = await resp.json();
 
     if (!dados.ok) throw new Error(dados.description);
 
-    console.log("Chat", dados)
     return dados.result;
 }
 
 // Função que envia mensagem para um chat especifico
 async function enviarMensagem(chatId, mensagem) {
-    const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-
-    const resposta = await fetch(url, {
+    const resposta = await fetch(API_URL + 'sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chat_id: chatId, text: mensagem })
