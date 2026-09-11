@@ -36,7 +36,7 @@ async function eventos(ticker) {
         console.log(`A cripto ${ticker.simbolo} aumentou ${ticker.variacao_perc_24h.toFixed(2)}% em 24h`);
         
         if ((agr - ultimo_aviso) >= 60000 || ultimo_aviso === undefined) {
-            await enviarMsgParaTodos(1, ticker.variacao_perc_24h);
+            await enviarMsgParaTodos(1, ticker.variacao_perc_24h, ticker.preco);
             ultimo_aviso = agr;
         }
     }
@@ -46,7 +46,7 @@ async function eventos(ticker) {
         console.log(`A cripto ${ticker.simbolo} diminuiu ${ticker.variacao_perc_24h.toFixed(2)}% em 24h`);
         
         if ((agr - ultimo_aviso) >= 60000 || ultimo_aviso === undefined) {
-            await enviarMsgParaTodos(0, ticker.variacao_perc_24h);
+            await enviarMsgParaTodos(0, ticker.variacao_perc_24h, ticker.preco);
             ultimo_aviso = agr;
         }
     }

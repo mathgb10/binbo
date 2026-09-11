@@ -35,7 +35,7 @@ async function enviarMensagem(chatId, mensagem) {
 }
 
 // Função que envia mensagem para todos os chats disponiveis
-async function enviarMsgParaTodos(tipo,porcentagem) {
+async function enviarMsgParaTodos(tipo,porcentagem, preco) {
     console.log("Preparando mensagens...")
     switch (tipo) {
         case 1:
@@ -48,6 +48,8 @@ async function enviarMsgParaTodos(tipo,porcentagem) {
             var msg = `⚪️ A cripto se manteve estável em 24h`;
             break;
     }
+
+    msg += `\n\n🪙 Preço atual: R$ ${preco.toFixed(2)}`;
     
     const chats = await buscarChat();
     console.log(`Encontrados ${chats.length} chats.`);
