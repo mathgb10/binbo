@@ -17,22 +17,38 @@ function processar(ticker) {
         maior_preco_24h: Number(ticker.h),
         menor_preco_24h: Number(ticker.l),
         volume: Number(ticker.v),
-        horario: Number(ticker.E), 
+        horario: Number(ticker.E),
     };
+
+    console.log(dadosFormatados);
 
     att(dadosFormatados);
     eventos(dadosFormatados);
-} 
+}
+
+let ultimo_aviso;
 
 // Caso minha variação de preço em 24 seja maior que 1.2% disparo uma mensagem de aumento
 // Caso contrário, disparo uma mensagem de queda, caso seja menor que -1.2%
-function eventos(ticker){
+async function eventos(ticker) {
     if (ticker.variacao_perc_24h >= 1.2) {
-        enviarMsgParaTodos(1,ticker.variacao_perc_24h);
+        const agr = Date.now();
+        console.log(`A cripto ${ticker.simbolo} aumentou ${ticker.variacao_perc_24h.toFixed(2)}% em 24h`);
+        
+        if ((agr - ultimo_aviso) >= 60000) {
+            await enviarMsgParaTodos(1, ticker.variacao_perc_24h);
+            ultimo_aviso = agr;
+        }
     }
-    
-    if(ticker.variacao_perc_24h <= -1.2){
-        enviarMsgParaTodos(0,ticker.variacao_perc_24h);
+
+    if (ticker.variacao_perc_24h <= -1.2) {
+        const agr = Date.now();
+        console.log(`A cripto ${ticker.simbolo} diminuiu ${ticker.variacao_perc_24h.toFixed(2)}% em 24h`);
+        
+        if ((agr - ultimo_aviso) >= 60000) {
+            await enviarMsgParaTodos(0, ticker.variacao_perc_24h);
+            ultimo_aviso = agr;
+        }
     }
 }
 
