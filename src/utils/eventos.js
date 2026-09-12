@@ -43,6 +43,7 @@ async function eventos(ticker) {
 
     if (ticker.variacao_perc_24h <= -1.2) {
         const agr = Date.now();
+        console.log(agr);
         console.log(`A cripto ${ticker.simbolo} diminuiu ${ticker.variacao_perc_24h.toFixed(2)}% em 24h`);
         
         if ((agr - ultimo_aviso) >= 60000 || ultimo_aviso === undefined) {

@@ -51,10 +51,16 @@ async function enviarMsgParaTodos(tipo,porcentagem, preco) {
 
     msg += `\n\n🪙 Preço atual: R$ ${preco.toFixed(2)}`;
     
+    const chats_encontrados = [];
     const chats = await buscarChat();
     console.log(`Encontrados ${chats.length} chats.`);
     chats.forEach(e => {
+        if (chats_encontrados.includes(e.message.chat.id)) {
+            console.log(`Chat ${e.message.chat.id} já recebeu mensagem, pulando...`);
+            return;
+        }
         console.log(`Enviando mensagem para chat ${e.message.chat.id}`);
+        chats_encontrados.push(e.message.chat.id);
         enviarMensagem(e.message.chat.id, msg);
     });
 }
