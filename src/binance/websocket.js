@@ -8,7 +8,7 @@ function conectar() {
     
     // Cria o Socket apontando pra Binance
     // Se a conexão falhar 3 vezes, ele tenta conectar na Binance US
-    let socket = mortes < 3 ? new webSocket('wss://stream.binance.com/ws/btcbrl@ticker') : new webSocket('wss://stream.binance.us/ws/btcbrl@ticker');
+    let socket = mortes < 3 ? new webSocket('wss://stream.binance.com/ws/btcbrl@ticker') : new webSocket('wss://data-stream.binance.vision/ws/btcbrl@ticker');
 
     // Incia o Socket
     socket.on('open', async () => {
